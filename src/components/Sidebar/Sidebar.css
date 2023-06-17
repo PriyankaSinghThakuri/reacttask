@@ -1,0 +1,12 @@
+.sidebar{
+    color: #fff;
+    background-color:rgba(65,65,65,.6)!important;
+}
+.StoreName{
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #fff;
+}
+#menuitem:hover{
+    color: blue;
+}

@@ -1,0 +1,59 @@
+.dashboard-container{
+    display: flex;
+    flex-direction: column;
+  
+}
+h1{
+    text-align: center;
+    color: green;
+}
+.dashboard-title{
+    margin-left: 43rem;
+}
+.Cards{
+    margin-top: -2rem;
+}
+.top-section{
+    justify-content: space-evenly;
+}
+.center-section{
+    display: flex;
+    flex-direction: row;
+}
+.bottom-section{
+    display: flex;
+    flex-direction: row;
+}
+.saleimage{
+   margin: 0rem 0rem 0rem 0rem;
+   width: 94.8rem;
+   height: 80vh;
+   display: block;
+}
+.freeshippingimage{
+    width: 50%;
+    height: auto;
+    padding-top: 1.5rem;
+}
+.Cards{
+    display: flex;
+    flex-direction: row;  
+}
+.Categories{
+    padding-top: 5rem;
+}
+.top-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    justify-content: space-between;
+}
+.signout-btn{
+    width: 5rem;
+    height: 3rem;
+    margin: 1rem;
+    background-color: rgb(123, 220, 123);
+}
+.signout-btn:hover{
+    background-color: rgb(63, 166, 63);
+}
