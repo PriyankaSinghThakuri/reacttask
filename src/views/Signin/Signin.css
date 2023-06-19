@@ -1,62 +1,62 @@
-.login{
+.login {
   /* background-color: whitesmoke; */
   padding-bottom: 5.5rem;
 }
-.login-form{
-    width: 35rem;
-    height: 35rem;
-    border: 5px solid whitesmoke;
-    margin-left: 32rem;
-    border-radius: 5px;
-    box-shadow: 0px 4px 1.5px rgb(249, 246, 246);
-    background-color: white;
-    margin-top: 8%;
+.login-form {
+  width: 35rem;
+  height: 35rem;
+  border: 5px solid whitesmoke;
+  margin-left: 32rem;
+  border-radius: 5px;
+  box-shadow: 0px 4px 1.5px rgb(249, 246, 246);
+  background-color: white;
+  margin-top: 8%;
 }
-  .mediaicon{
-    padding: 1rem;
-  }
-  .title{
-    font-size: 40px;
-    color: rgb(59, 59, 140);
-    font-weight: 600;
-    padding-top: 1rem;
-    text-align: center;
-  }
-  .email{
-    padding: 2rem;
-  }
-  .input-email{
-    width: 22rem;
-    height: 3rem;
-  }
-  .password{
-    padding: 2rem;
-  }
-  .input-password{
-    width: 22rem;
-    height: 3rem;
-  }
-  .username{
-    padding: 2rem;
-  }
-  .input-username{
-    width: 20rem;
-    height: 3rem;
-  }
-  .login-button{
-    height: 2rem;
-    width: 22rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    background-color: rgb(168, 168, 203);
-  }
-  .login-button:hover{
-    background-color: rgb(116, 156, 216);
-  }
-  .Back-btn{
-    margin-top: 3rem;
-    padding: 0.5rem;
-  }
-  .Back-btn:hover{
-    background-color: rgb(116, 156, 216);
-  }
+.mediaicon {
+  padding: 1rem;
+}
+.title {
+  font-size: 40px;
+  color: rgb(59, 59, 140);
+  font-weight: 600;
+  padding-top: 1rem;
+  text-align: center;
+}
+.username {
+  padding: 2rem;
+}
+.input-username {
+  width: 22rem;
+  height: 3rem;
+}
+.password {
+  padding: 2rem;
+}
+.input-password {
+  width: 22rem;
+  height: 3rem;
+}
+.username {
+  padding: 2rem;
+}
+.input-username {
+  width: 20rem;
+  height: 3rem;
+}
+.login-button {
+  height: 2rem;
+  width: 22rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: rgb(168, 168, 203);
+}
+.login-button:hover {
+  background-color: rgb(116, 156, 216);
+}
+.Back-btn {
+  margin-top: 3rem;
+  padding: 0.5rem;
+}
+.Back-btn:hover {
+  background-color: rgb(116, 156, 216);
+}

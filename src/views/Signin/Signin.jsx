@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import { userdata } from "../../models/UserData";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -15,19 +16,20 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("{username:'', password:''}");
   const formdata = { username, password };
+
   // User Login info
-  const database = [
-    {
-      username: "itsadmin",
-      password: "admin123",
-      role: "admin",
-    },
-    {
-      username: "itssupervisor",
-      password: "supervisor123",
-      role: "supervisor",
-    },
-  ];
+  // const database = [
+  //   {
+  //     username: "itsadmin",
+  //     password: "admin123",
+  //     role: "admin",
+  //   },
+  //   {
+  //     username: "itssupervisor",
+  //     password: "supervisor123",
+  //     role: "supervisor",
+  //   },
+  // ];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -74,7 +76,7 @@ const Signin = () => {
     //   navigate("/e-commerce-application");
     // }
     if (errorCount === 0) {
-      const user = database.find(
+      const user = userdata.find(
         (user) => user.username === username && user.password === password
       );
       if (user) {
@@ -107,11 +109,11 @@ const Signin = () => {
             <FontAwesomeIcon icon={faGoogle} className="mediaicon" size="2x" />
           </div>
           <h4 className="text-muted"> Or Sign in using</h4>
-          <div className="email">
+          <div className="username">
             <input
               type="text"
               autoComplete="false"
-              className="input-email"
+              className="input-username"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}

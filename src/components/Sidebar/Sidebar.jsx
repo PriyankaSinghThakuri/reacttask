@@ -12,7 +12,6 @@ import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = () => {
-  
   return (
     <div
       style={{
@@ -26,35 +25,29 @@ const Sidebar = () => {
       <CDBSidebar className="sidebar">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="StoreName">
-            The Gadget Zone
+            E-Commerce
           </a>
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink to="/">
+            <NavLink to="/dashboard">
               <CDBSidebarMenuItem icon="home" id="menuitem">
                 Dashboard
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="profile">
-              <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
+            <NavLink to="/dashboard/users">
+              <CDBSidebarMenuItem icon="user">Users</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="customers">
-              <CDBSidebarMenuItem icon="user">Customers</CDBSidebarMenuItem>
+            <NavLink to="/dashboard/roles">
+              <CDBSidebarMenuItem icon="chart-line">Roles</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="customers">
-              <CDBSidebarMenuItem icon="chart-line">
-                Customers
+
+            <NavLink to="/dashboard/items">
+              <CDBSidebarMenuItem icon="user" id="menuitem">
+                Items
               </CDBSidebarMenuItem>
             </NavLink>
-      
-              <NavLink to="signin">
-                <CDBSidebarMenuItem icon="user" id="menuitem">
-                  login
-                </CDBSidebarMenuItem>
-              </NavLink>
-       
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
