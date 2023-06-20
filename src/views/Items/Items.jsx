@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { itemsdata } from "../../models/ItemsData";
+import "bootstrap/dist/js/bootstrap.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Items = () => {
   const [items, setItems] = useState([]);
@@ -18,8 +20,19 @@ const Items = () => {
   const [itemsPerPage] = useState(5);
 
   useEffect(() => {
-    setItems(itemsdata);
+    // Fetch items from the localStorage
+    const savedItems = localStorage.getItem("items");
+    if (savedItems) {
+      setItems(JSON.parse(savedItems));
+    } else {
+      setItems(itemsdata);
+    }
   }, []);
+
+  useEffect(() => {
+    // Save items to the localStorage whenever the 'items' state changes
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -89,73 +102,114 @@ const Items = () => {
   return (
     <div>
       <h3 style={{ marginTop: "20px" }}>Items List</h3>
-      {!showInputs && (
-        <button
-          onClick={() => setShowInputs(true)}
-          style={{
-            position: "absolute",
-            top: "0",
-            right: "0",
-            margin: "10px",
-            padding: "10px",
-            marginRight: "50px",
-            marginTop: "20px",
-          }}
-        >
-          Add Item
-        </button>
-      )}
-      {showInputs && (
-        <div>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={newItem.name}
-            onChange={handleInputChange}
-          />
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="description"
-            placeholder="Description"
-            value={newItem.description}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="price"
-            placeholder="Price"
-            value={newItem.price}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="category"
-            placeholder="Category"
-            value={newItem.category}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="NumberInStock"
-            placeholder="Quantity"
-            value={newItem.NumberInStock}
-            onChange={handleInputChange}
-          />
 
-          {editingItemId ? (
-            <button onClick={updateItem}>Update Item</button>
-          ) : (
-            <button onClick={addItem}>Save Item</button>
-          )}
+      <button
+        onClick={() => setShowInputs(true)}
+        style={{
+          position: "absolute",
+          top: "0",
+          right: "0",
+          margin: "10px",
+          padding: "10px",
+          marginRight: "50px",
+          marginTop: "20px",
+        }}
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        Add Item
+      </button>
+
+      {/* <!-- Modal --> */}
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Modal title
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={newItem.name}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="description"
+                  placeholder="Description"
+                  value={newItem.description}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="price"
+                  placeholder="Price"
+                  value={newItem.price}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="category"
+                  placeholder="Category"
+                  value={newItem.category}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="NumberInStock"
+                  placeholder="Quantity"
+                  value={newItem.NumberInStock}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button">
+                {editingItemId ? (
+                  <button onClick={updateItem}>Update Item</button>
+                ) : (
+                  <button onClick={addItem}>Save Item</button>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
-      )}
+      </div>
 
       {currentItems.length > 0 ? (
         <table>
@@ -199,6 +253,10 @@ const Items = () => {
                   <button
                     onClick={() => editItem(item.id)}
                     style={{ margin: "1rem" }}
+                    type="button"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
                   >
                     Edit
                   </button>
@@ -209,7 +267,7 @@ const Items = () => {
           </tbody>
         </table>
       ) : (
-        <p>No users found.</p>
+        <p>No items found.</p>
       )}
       {/* Pagination */}
       <div
