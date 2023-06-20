@@ -8,7 +8,6 @@ import {
   CDBSidebarMenuItem,
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
-
 import "./Sidebar.css";
 
 const Sidebar = () => {
@@ -19,12 +18,13 @@ const Sidebar = () => {
         height: "100vh",
         overflow: "scroll initial",
         position: "fixed",
+        zIndex: "1",
       }}
       className="sidebar-container"
     >
       <CDBSidebar className="sidebar">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a href="/" className="StoreName">
+          <a href="#" className="StoreName">
             E-Commerce
           </a>
         </CDBSidebarHeader>
@@ -32,27 +32,37 @@ const Sidebar = () => {
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <NavLink to="/dashboard">
-              <CDBSidebarMenuItem icon="home" id="menuitem">
+              <CDBSidebarMenuItem icon="chart-pie" id="menuitem">
                 Dashboard
               </CDBSidebarMenuItem>
             </NavLink>
             <NavLink to="/dashboard/users">
-              <CDBSidebarMenuItem icon="user">Users</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user" id="menuitem">
+                Users
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink to="/dashboard/roles">
-              <CDBSidebarMenuItem icon="chart-line">Roles</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="users" id="menuitem">
+                Roles
+              </CDBSidebarMenuItem>
             </NavLink>
 
             <NavLink to="/dashboard/items">
-              <CDBSidebarMenuItem icon="user" id="menuitem">
+              <CDBSidebarMenuItem icon="tools" id="menuitem">
                 Items
+              </CDBSidebarMenuItem>
+            </NavLink>
+
+            <NavLink to="/dashboard/sales">
+              <CDBSidebarMenuItem icon="chart-line" id="menuitem">
+                Sales
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
         <CDBSidebarFooter>
-          <div className="sidebar-footer">
+          {/* <div className="sidebar-footer">
             <CDBSidebarMenu>
               <CDBSidebarContent>
                 <NavLink to="/">
@@ -67,7 +77,7 @@ const Sidebar = () => {
                 </NavLink>
               </CDBSidebarContent>
             </CDBSidebarMenu>
-          </div>
+          </div> */}
         </CDBSidebarFooter>
       </CDBSidebar>
     </div>

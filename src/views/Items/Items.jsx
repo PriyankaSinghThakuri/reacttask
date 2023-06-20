@@ -225,7 +225,7 @@ const Items = () => {
             {Array.from(
               { length: Math.ceil(items.length / itemsPerPage) },
               (_, index) => (
-                <li key={index} style={{margin:"8px"}}>
+                <li key={index} style={{ margin: "8px" }}>
                   <button onClick={() => paginate(index + 1)}>
                     {index + 1}
                   </button>

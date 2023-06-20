@@ -1,10 +1,10 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Signin from "./views/Signin/Signin";
-import Users from "./components/Users/Users";
+import Users from "./views/Users/Users";
 import Dash from "./Dash";
-import Role from "./components/Role/Role";
-import Items from "./components/Items/Items";
+import Role from "./views/Role/Role";
+import Items from "./views/Items/Items";
 import Dashboard from "./views/Dashboard/Dashboard";
 
 function App() {

@@ -8,6 +8,8 @@ const itemsdata = [
     category: "Electronics",
     image_url: "/assets/WirelessBluetoothEarbuds.jpg",
     NumberInStock: 10,
+    todaySale: 5,
+    totalSale: 50,
   },
   {
     id: 2,
@@ -18,6 +20,8 @@ const itemsdata = [
     category: "Electronics",
     image_url: "/assets/Smartphone.jpg",
     NumberInStock: 10,
+    todaySale: 5,
+    totalSale: 150,
   },
   {
     id: 3,
@@ -28,6 +32,8 @@ const itemsdata = [
     category: "Electronics",
     image_url: "/assets/Laptop.jpg",
     NumberInStock: 10,
+    todaySale: 0,
+    totalSale: 100,
   },
   {
     id: 4,
@@ -38,6 +44,8 @@ const itemsdata = [
     category: "Electronics",
     image_url: "/assets/WirelessChargingPad.jpg",
     NumberInStock: 10,
+    todaySale: 0,
+    totalSale: 200,
   },
   {
     id: 5,
@@ -48,6 +56,8 @@ const itemsdata = [
     category: "Electronics",
     image_url: "/assets/SmartTV.png",
     NumberInStock: 10,
+    todaySale: 0,
+    totalSale: 50,
   },
   {
     id: 6,
@@ -58,6 +68,8 @@ const itemsdata = [
     category: "Electronics",
     image_url: "/assets/DigitalCamera.png",
     NumberInStock: 10,
+    todaySale: 5,
+    totalSale: 250,
   },
   {
     id: 7,
@@ -68,6 +80,8 @@ const itemsdata = [
     category: "Electronics",
     image_url: "/assets/WirelessHeadphones.jpg",
     NumberInStock: 10,
+    todaySale: 2,
+    totalSale: 50,
   },
 ];
 
