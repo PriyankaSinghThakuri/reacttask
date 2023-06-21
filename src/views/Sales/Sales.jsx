@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import { itemsdata } from "../../models/ItemsData";
 
 export const Sales = () => {
+  const errorstyle = {
+    color: "red",
+    fontSize: "12px",
+  };
   const [items, setItems] = useState([]);
   const [newQuantity, setNewQuantity] = useState("");
   const [showInputs, setShowInputs] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [newstock, setNewStock] = useState(false);
   const [SelectedItemName, setSelectedItemName] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
     // Fetch items from the localStorage
@@ -29,6 +34,17 @@ export const Sales = () => {
     setNewQuantity(value);
   };
 
+  const validateForm = () => {
+    const errors = {};
+
+    if (!newQuantity || isNaN(newQuantity)) {
+      errors.quantity = "Please enter a valid quantity";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0; // Returns true if there are no errors
+  };
+
   // Restock the items in the stock
   const restock = (id) => {
     setShowInputs(true);
@@ -36,7 +52,6 @@ export const Sales = () => {
     setNewStock(true);
     const nameToShow = items.find((item) => item.id === id);
     setSelectedItemName(nameToShow.name);
-    console.log(nameToShow.name);
   };
 
   // Sell the items and update the available quantity
@@ -50,33 +65,35 @@ export const Sales = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Find the selected item by its id
-    const selectedItem = items.find((item) => item.id === selectedItemId);
+    if (validateForm()) {
+      // Find the selected item by its id
+      const selectedItem = items.find((item) => item.id === selectedItemId);
 
-    // Parse the new quantity value to a number
-    const quantity = parseInt(newQuantity);
+      // Parse the new quantity value to a number
+      const quantity = parseInt(newQuantity);
 
-    console.log(selectedItem, quantity);
+      if (selectedItem && !isNaN(quantity)) {
+        // Update the item based on the action (restock or sell)
+        if (newstock) {
+          // Restocking: Add the quantity to the current stock
+          selectedItem.NumberInStock += quantity;
+        } else {
+          // Selling: Subtract the quantity from the current stock
+          selectedItem.NumberInStock -= quantity;
+          // Add the quantity to today's sale
+          selectedItem.todaySale += quantity;
+        }
 
-    if (selectedItem && !isNaN(quantity)) {
-      // Update the item based on the action (restock or sell)
-      if (newstock) {
-        // Restocking: Add the quantity to the current stock
-        selectedItem.NumberInStock += quantity;
-      } else {
-        // Selling: Subtract the quantity from the current stock
-        selectedItem.NumberInStock -= quantity;
-        // Add the quantity to today's sale
-        selectedItem.todaySale += quantity;
+        // Set the updated item to the state
+        setItems([...items]);
       }
 
-      // Set the updated item to the state
-      setItems([...items]);
+      // Reset the form inputs and state
+      setShowInputs(false);
+      setSelectedItemId(null);
+      setNewQuantity("");
+      setFormErrors({});
     }
-
-    // Reset the form inputs and state
-    setShowInputs(false);
-    setSelectedItemId(null);
   };
 
   // Search items by name
@@ -183,6 +200,7 @@ export const Sales = () => {
                   <div className="form-group">
                     <label htmlFor="quantity">Quantity:</label>
                     <br />
+
                     <input
                       type="text"
                       id="name"
@@ -191,13 +209,22 @@ export const Sales = () => {
                       value={SelectedItemName}
                     />
 
-                    <input
-                      type="number"
-                      id="quantity"
-                      name="quantity"
-                      value={newQuantity}
-                      onChange={handleInputChange}
-                    />
+                    <div>
+                      <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        value={newQuantity}
+                        onChange={handleInputChange}
+                      />
+                      <div>
+                        {formErrors.quantity && (
+                          <span className="error" style={errorstyle}>
+                            {formErrors.quantity}
+                          </span>
+                        )}
+                      </div>
+                    </div>
                   </div>
                   <button type="submit" className="btn btn-primary">
                     {showInputs ? "Restock" : "Sell"}

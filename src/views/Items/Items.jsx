@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { itemsdata } from "../../models/ItemsData";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Items = () => {
+  const errorstyle = {
+    color: "red",
+    fontSize: "12px",
+  };
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState({
     name: "",
@@ -17,6 +19,7 @@ const Items = () => {
   });
   const [editingItemId, setEditingItemId] = useState(null);
   const [showInputs, setShowInputs] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -45,20 +48,49 @@ const Items = () => {
     }
   };
 
-  const addItem = () => {
-    const newItemId = Math.max(...items.map((item) => item.id)) + 1;
-    const newItemWithId = { id: newItemId, ...newItem };
+  const validateForm = () => {
+    const errors = {};
 
-    setItems((prevState) => [...prevState, newItemWithId]);
-    setNewItem({
-      name: "",
-      image: null,
-      description: "",
-      price: "",
-      category: "",
-      NumberInStock: "",
-    });
-    setShowInputs(false);
+    if (!newItem.name) {
+      errors.name = "Name is required";
+    }
+    if (!newItem.image) {
+      errors.image = "Image is required";
+    }
+    if (!newItem.description) {
+      errors.description = "Description is required";
+    }
+    if (!newItem.price) {
+      errors.price = "Price is required";
+    }
+    if (!newItem.category) {
+      errors.category = "Category is required";
+    }
+    if (!newItem.NumberInStock) {
+      errors.NumberInStock = "Quantity is required";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0; // Returns true if there are no errors
+  };
+
+  const addItem = () => {
+    if (validateForm()) {
+      const newItemId = Math.max(...items.map((item) => item.id)) + 1;
+      const newItemWithId = { id: newItemId, ...newItem };
+
+      setItems((prevState) => [...prevState, newItemWithId]);
+      setNewItem({
+        name: "",
+        image: null,
+        description: "",
+        price: "",
+        category: "",
+        NumberInStock: "",
+      });
+      setShowInputs(false);
+      setFormErrors({});
+    }
   };
 
   const editItem = (itemId) => {
@@ -66,23 +98,27 @@ const Items = () => {
     setEditingItemId(itemId);
     setNewItem({ ...itemToEdit });
     setShowInputs(true);
+    setFormErrors({});
   };
 
   const updateItem = () => {
-    const updatedItems = items.map((item) =>
-      item.id === editingItemId ? { ...item, ...newItem } : item
-    );
-    setItems(updatedItems);
-    setNewItem({
-      name: "",
-      image: null,
-      description: "",
-      price: "",
-      category: "",
-      NumberInStock: "",
-    });
-    setEditingItemId(null);
-    setShowInputs(false);
+    if (validateForm()) {
+      const updatedItems = items.map((item) =>
+        item.id === editingItemId ? { ...item, ...newItem } : item
+      );
+      setItems(updatedItems);
+      setNewItem({
+        name: "",
+        image: null,
+        description: "",
+        price: "",
+        category: "",
+        NumberInStock: "",
+      });
+      setEditingItemId(null);
+      setShowInputs(false);
+      setFormErrors({});
+    }
   };
 
   const deleteItem = (itemId) => {
@@ -150,47 +186,93 @@ const Items = () => {
             </div>
             <div class="modal-body">
               <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={newItem.name}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="file"
-                  name="image"
-                  accept="image/*"
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  name="description"
-                  placeholder="Description"
-                  value={newItem.description}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  name="price"
-                  placeholder="Price"
-                  value={newItem.price}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  name="category"
-                  placeholder="Category"
-                  value={newItem.category}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  name="NumberInStock"
-                  placeholder="Quantity"
-                  value={newItem.NumberInStock}
-                  onChange={handleInputChange}
-                />
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    value={newItem.name}
+                    onChange={handleInputChange}
+                  />
+                  <div>
+                    {formErrors.name && (
+                      <span style={errorstyle}>{formErrors.name}</span>
+                    )}
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleInputChange}
+                  />
+                  <div>
+                    {formErrors.image && (
+                      <span style={errorstyle}>{formErrors.image}</span>
+                    )}
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <input
+                    type="text"
+                    name="description"
+                    placeholder="Description"
+                    value={newItem.description}
+                    onChange={handleInputChange}
+                  />
+                  <div>
+                    {formErrors.description && (
+                      <span style={errorstyle}>{formErrors.description}</span>
+                    )}
+                  </div>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <input
+                    type="text"
+                    name="price"
+                    placeholder="Price"
+                    value={newItem.price}
+                    onChange={handleInputChange}
+                  />
+                  <div>
+                    {formErrors.price && (
+                      <span style={errorstyle}>{formErrors.price}</span>
+                    )}
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <input
+                    type="text"
+                    name="category"
+                    placeholder="Category"
+                    value={newItem.category}
+                    onChange={handleInputChange}
+                  />
+                  <div>
+                    {formErrors.category && (
+                      <span style={errorstyle}>{formErrors.category}</span>
+                    )}
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <input
+                    type="text"
+                    name="NumberInStock"
+                    placeholder="Quantity"
+                    value={newItem.NumberInStock}
+                    onChange={handleInputChange}
+                  />
+                  <div>
+                    {formErrors.NumberInStock && (
+                      <span style={errorstyle}>{formErrors.NumberInStock}</span>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
             <div class="modal-footer">

@@ -93,55 +93,64 @@ const Signin = () => {
   };
 
   return (
-    <div className="login" onSubmit={handleSubmit}>
-      <div className="login-form">
-        <form>
-          <h4 className="text-muted" style={{ paddingTop: "2rem" }}>
-            Sign In
-          </h4>
-          <div className="signin-icons">
-            <FontAwesomeIcon
-              icon={faFacebookF}
-              className="mediaicon"
-              size="2x"
-            />
-            <FontAwesomeIcon icon={faGoogle} className="mediaicon" size="2x" />
-          </div>
-          <h4 className="text-muted"> Or Sign in using</h4>
-          <div className="username">
-            <input
-              type="text"
-              autoComplete="false"
-              className="input-username"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            {errors.username && (
-              <p style={{ textDecoration: "none", color: "red" }}>
-                {errors.username}
-              </p>
-            )}
-          </div>
-          <div className="password">
-            <input
-              type="password"
-              autoComplete="false"
-              className="input-password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {errors.password && (
-              <p style={{ textDecoration: "none", color: "red" }}>
-                {errors.password}
-              </p>
-            )}
-          </div>
-          <button className="login-button" type="submit">
-            Log In
-          </button>
-        </form>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "5rem",
+      }}
+    >
+      <div>
+        <img
+          src={process.env.PUBLIC_URL + "/assets/login.jpg"}
+          alt="Responsive-img"
+          className="login-img"
+        />
+      </div>
+      <div className="login" onSubmit={handleSubmit}>
+        <div className="login-form">
+          <form>
+            <h2 style={{ paddingTop: "2rem", color: " rgb(53, 99, 250);" }}>
+              Sign In
+            </h2>
+
+            <div className="username">
+              <input
+                type="text"
+                autoComplete="false"
+                className="input-username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              {errors.username && (
+                <p style={{ textDecoration: "none", color: "red" }}>
+                  {errors.username}
+                </p>
+              )}
+            </div>
+            <div className="password">
+              <input
+                type="password"
+                autoComplete="false"
+                className="input-password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {errors.password && (
+                <p style={{ textDecoration: "none", color: "red" }}>
+                  {errors.password}
+                </p>
+              )}
+            </div>
+            <button className="login-button" type="submit">
+              Log In
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

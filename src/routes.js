@@ -8,7 +8,7 @@ const routes = [
   {
     path: "/dashboard",
     component: Dashboard,
-    role: ["supervisor", "admin"], // Example of roles allowed to access this route
+    role: ["supervisor", "admin"],
   },
   {
     path: "/dashboard/users",

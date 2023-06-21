@@ -4,12 +4,17 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Role = () => {
+  const errorstyle = {
+    color: "red",
+    fontSize: "12px",
+  };
   const [roles, setRoles] = useState([]);
   const [newRole, setnewRole] = useState({
     name: "",
   });
   const [editingUserId, setEditingUserId] = useState(null);
   const [showInputs, setShowInputs] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
     // Fetch roles from localStorage or use default data
@@ -31,15 +36,29 @@ const Role = () => {
     setnewRole((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const addRole = () => {
-    // Generate a new unique id for the role
-    const newRoleId = Math.max(...roles.map((role) => role.id)) + 1;
-    const newRoleWithId = { id: newRoleId, ...newRole };
+  const validateForm = () => {
+    const errors = {};
 
-    // Add new role to the list
-    setRoles((prevState) => [...prevState, newRoleWithId]);
-    setnewRole({ name: "" });
-    setShowInputs(false);
+    if (!newRole.name) {
+      errors.name = "Name is required";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0; // Returns true if there are no errors
+  };
+
+  const addRole = () => {
+    if (validateForm()) {
+      // Generate a new unique id for the role
+      const newRoleId = Math.max(...roles.map((role) => role.id)) + 1;
+      const newRoleWithId = { id: newRoleId, ...newRole };
+
+      // Add new role to the list
+      setRoles((prevState) => [...prevState, newRoleWithId]);
+      setnewRole({ name: "" });
+      setShowInputs(false);
+      setFormErrors({});
+    }
   };
 
   const editRole = (roleId) => {
@@ -49,16 +68,20 @@ const Role = () => {
       name: roleToEdit.name,
     });
     setShowInputs(true);
+    setFormErrors({});
   };
 
   const updateRole = () => {
-    const updatedRoles = roles.map((role) =>
-      role.id === editingUserId ? { ...role, ...newRole } : role
-    );
-    setRoles(updatedRoles);
-    setnewRole({ name: "" });
-    setEditingUserId(null);
-    setShowInputs(false);
+    if (validateForm()) {
+      const updatedRoles = roles.map((role) =>
+        role.id === editingUserId ? { ...role, ...newRole } : role
+      );
+      setRoles(updatedRoles);
+      setnewRole({ name: "" });
+      setEditingUserId(null);
+      setShowInputs(false);
+      setFormErrors({});
+    }
   };
 
   const deleteRole = (roleId) => {
@@ -114,7 +137,7 @@ const Role = () => {
               </button>
             </div>
             <div class="modal-body">
-              <div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
                 <input
                   type="text"
                   name="name"
@@ -122,6 +145,9 @@ const Role = () => {
                   value={newRole.name}
                   onChange={handleInputChange}
                 />
+                {formErrors.name && (
+                  <span style={errorstyle}>{formErrors.name}</span>
+                )}
               </div>
             </div>
             <div class="modal-footer">
