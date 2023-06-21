@@ -4,6 +4,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Users.css";
 
+
 const User = () => {
   const errorstyle = {
     color: "red",
@@ -98,7 +99,7 @@ const User = () => {
     const userToEdit = users.find((user) => user.id === userId);
     setEditingUserId(userId);
     setNewUser({
-      name: userToEdit.name,
+      name: userToEdit.username,
       email: userToEdit.email,
       address: userToEdit.address,
       role: userToEdit.role,

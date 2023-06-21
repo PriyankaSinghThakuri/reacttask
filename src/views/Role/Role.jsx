@@ -31,7 +31,7 @@ const Role = () => {
     setnewRole((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const addUser = () => {
+  const addRole = () => {
     // Generate a new unique id for the role
     const newRoleId = Math.max(...roles.map((role) => role.id)) + 1;
     const newRoleWithId = { id: newRoleId, ...newRole };
@@ -42,7 +42,7 @@ const Role = () => {
     setShowInputs(false);
   };
 
-  const editUser = (roleId) => {
+  const editRole = (roleId) => {
     const roleToEdit = roles.find((role) => role.id === roleId);
     setEditingUserId(roleId);
     setnewRole({
@@ -51,7 +51,7 @@ const Role = () => {
     setShowInputs(true);
   };
 
-  const updateUser = () => {
+  const updateRole = () => {
     const updatedRoles = roles.map((role) =>
       role.id === editingUserId ? { ...role, ...newRole } : role
     );
@@ -61,7 +61,7 @@ const Role = () => {
     setShowInputs(false);
   };
 
-  const deleteUser = (roleId) => {
+  const deleteRole = (roleId) => {
     const updatedRoles = roles.filter((role) => role.id !== roleId);
     setRoles(updatedRoles);
   };
@@ -133,9 +133,9 @@ const Role = () => {
                 Close
               </button>
               {editingUserId ? (
-                <button onClick={updateUser}>Update Role</button>
+                <button onClick={updateRole}>Update Role</button>
               ) : (
-                <button onClick={addUser}>Save Role</button>
+                <button onClick={addRole}>Save Role</button>
               )}
             </div>
           </div>
@@ -158,7 +158,7 @@ const Role = () => {
                 <td>{role.name}</td>
                 <td>
                   <button
-                    onClick={() => editUser(role.id)}
+                    onClick={() => editRole(role.id)}
                     style={{ margin: "1rem" }}
                     type="button"
                     class="btn btn-primary"
@@ -167,7 +167,7 @@ const Role = () => {
                   >
                     Edit
                   </button>
-                  <button onClick={() => deleteUser(role.id)}>Delete</button>
+                  <button onClick={() => deleteRole(role.id)}>Delete</button>
                 </td>
               </tr>
             ))}

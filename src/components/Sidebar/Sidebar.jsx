@@ -11,6 +11,9 @@ import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = () => {
+  //get role from local storage
+  const role = localStorage.getItem("role");
+  console.log(role);
   return (
     <div
       style={{
@@ -31,11 +34,22 @@ const Sidebar = () => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink to="/dashboard">
-              <CDBSidebarMenuItem icon="chart-pie" id="menuitem">
-                Dashboard
-              </CDBSidebarMenuItem>
-            </NavLink>
+            {
+              //if role is supervisor then show the menu item
+              <>
+                <NavLink to="/dashboard">
+                  <CDBSidebarMenuItem icon="chart-pie" id="menuitem">
+                    Dashboard
+                  </CDBSidebarMenuItem>
+                </NavLink>
+                <NavLink to="/dashboard/items">
+                  <CDBSidebarMenuItem icon="tools" id="menuitem">
+                    Items
+                  </CDBSidebarMenuItem>
+                </NavLink>
+              </>
+            }
+
             <NavLink to="/dashboard/users">
               <CDBSidebarMenuItem icon="user" id="menuitem">
                 Users
@@ -47,11 +61,7 @@ const Sidebar = () => {
               </CDBSidebarMenuItem>
             </NavLink>
 
-            <NavLink to="/dashboard/items">
-              <CDBSidebarMenuItem icon="tools" id="menuitem">
-                Items
-              </CDBSidebarMenuItem>
-            </NavLink>
+            
 
             <NavLink to="/dashboard/sales">
               <CDBSidebarMenuItem icon="chart-line" id="menuitem">

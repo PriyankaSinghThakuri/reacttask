@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { itemsdata } from "../../models/ItemsData";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Items = () => {
   const [items, setItems] = useState([]);
@@ -220,7 +222,7 @@ const Items = () => {
               <th>Description</th>
               <th>Price</th>
               <th>Category</th>
-              <th>Quantity</th>
+              {/* <th>Quantity</th> */}
               <th>Actions</th>
             </tr>
           </thead>
@@ -248,7 +250,7 @@ const Items = () => {
                 <td>{item.description}</td>
                 <td>{item.price}</td>
                 <td>{item.category}</td>
-                <td>{item.NumberInStock}</td>
+                {/* <td>{item.NumberInStock}</td> */}
                 <td>
                   <button
                     onClick={() => editItem(item.id)}
@@ -260,7 +262,8 @@ const Items = () => {
                   >
                     Edit
                   </button>
-                  <button onClick={() => deleteItem(item.id)}>Delete</button>
+
+                  <button onClick={() => deleteItem(item.id)}> Delete</button>
                 </td>
               </tr>
             ))}

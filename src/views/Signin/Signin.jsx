@@ -7,7 +7,6 @@ import "./Signin.css";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { faBackward } from "@fortawesome/free-solid-svg-icons";
 import { userdata } from "../../models/UserData";
 
 const Signin = () => {
@@ -142,12 +141,6 @@ const Signin = () => {
           <button className="login-button" type="submit">
             Log In
           </button>
-          <div className="register-link">
-            <p>
-              Don't have an account?
-              <NavLink to="/signup">Sign Up</NavLink>
-            </p>
-          </div>
         </form>
       </div>
     </div>
