@@ -27,9 +27,9 @@ const Sidebar = () => {
     >
       <CDBSidebar className="sidebar">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a href="#" className="StoreName">
-            E-Commerce
-          </a>
+          <NavLink href="#" className="StoreName">
+            GadgetByte
+          </NavLink>
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
@@ -60,8 +60,6 @@ const Sidebar = () => {
                 Roles
               </CDBSidebarMenuItem>
             </NavLink>
-
-            
 
             <NavLink to="/dashboard/sales">
               <CDBSidebarMenuItem icon="chart-line" id="menuitem">

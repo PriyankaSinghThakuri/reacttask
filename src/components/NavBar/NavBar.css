@@ -1,0 +1,140 @@
+.navbar {
+  position: relative;
+  font-size: 15px;
+  backdrop-filter: blur(10px);
+  background-color: rgba(65, 65, 65, 0.6) !important;
+  color: #fff;
+  display: flex;
+  /* margin-bottom: 42rem; */
+  flex-direction: row;
+  height: 41.5px;
+  width: 100%;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+
+.navbar-nav {
+  filter: blur(0);
+  list-style: none;
+  margin-left: 47.5rem;
+  align-items: center;
+}
+
+.navbar-nav a {
+  margin: 0rem 1rem 0rem 0rem;
+  cursor: pointer;
+}
+.navbar-nav a:hover {
+  color: rgb(105, 42, 164);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+#gadgetzone_new {
+  background-color: green !important;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 10px;
+  margin-left: -3px;
+  margin-top: -8px;
+  position: absolute;
+}
+
+.bottom-navbar_components {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 2.6rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.logo {
+  height: 4rem;
+  width: 6rem;
+  margin-left: 20rem;
+}
+#header-search {
+  height: 3.5rem;
+  width: 35rem;
+  margin-left: 5rem;
+}
+.search-btn {
+  margin-bottom: -1rem;
+  height: 3.5rem;
+  width: 3.5rem;
+  border: 0em;
+  background-color: rgb(105, 42, 164);
+}
+.search-icon {
+  color: #fff;
+  height: 1.5rem;
+  width: 2rem;
+}
+.search-btn:hover {
+  background-color: rgb(163, 114, 204);
+}
+.cart-icon {
+  height: 2.5rem;
+  width: 3rem;
+  margin: 0rem 0rem -0.5rem 3rem;
+  cursor: pointer;
+}
+.cart-icon:hover {
+  color: rgb(105, 42, 164);
+}
+
+@media screen and (max-width: 800px) {
+  .navbar {
+    width: 10%;
+    margin-bottom: 15rem;
+    font-size: 14px;
+    margin-left: 45rem;
+    font-weight: 600;
+  }
+  .navbar-nav {
+    background-color: rgb(241, 237, 237);
+    width: 18rem;
+    border-radius: 25px;
+    display: flex;
+    margin: -15rem 1rem 0rem -30rem;
+  }
+  .navbar-nav a {
+    padding: 0;
+  }
+  .nav-link {
+    color: rgb(27, 27, 175) !important;
+  }
+  .nav-image {
+    width: 35px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .navbar {
+    width: 19%;
+    height: 10%;
+    margin-bottom: 24.3rem;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 18.5rem;
+  }
+  .navbar-nav {
+    background-color: white;
+    width: 12rem;
+    text-align: center;
+    border-radius: 25px;
+    padding: 0;
+    position: relative;
+    display: flex;
+    margin: -8rem 1rem 0rem -14rem;
+  }
+  .navbar-nav a {
+    padding: 0;
+  }
+  .nav-image {
+    width: 25px;
+  }
+}

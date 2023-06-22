@@ -8,6 +8,7 @@ import Items from "./views/Items/Items";
 import Dashboard from "./views/Dashboard/Dashboard";
 import { Sales } from "./views/Sales/Sales";
 import routes from "./routes";
+import Home from "./views/Home/Home";
 
 function App() {
   // Get the user's role from local storage or authentication context
@@ -15,7 +16,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Signin />} />
+        {/* //public routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<Signin />} />
         {/* //protected routes */}
         <Route path="/dashboard" element={<Dash />}>
           {/* <Route path="/dashboard" element={<Dashboard />} />
