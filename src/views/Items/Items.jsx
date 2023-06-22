@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { itemsdata } from "../../models/ItemsData";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { toast } from "react-toastify";
 
 const Items = () => {
   const errorstyle = {
@@ -90,6 +91,7 @@ const Items = () => {
       });
       setShowInputs(false);
       setFormErrors({});
+      toast.success("Item added successfully!");
     }
   };
 
@@ -99,6 +101,7 @@ const Items = () => {
     setNewItem({ ...itemToEdit });
     setShowInputs(true);
     setFormErrors({});
+    toast.success("Item edited successfully!");
   };
 
   const updateItem = () => {
@@ -118,12 +121,14 @@ const Items = () => {
       setEditingItemId(null);
       setShowInputs(false);
       setFormErrors({});
+      toast.success("Item updated successfully!");
     }
   };
 
   const deleteItem = (itemId) => {
     const updatedItems = items.filter((item) => item.id !== itemId);
     setItems(updatedItems);
+    toast.success("Item deleted successfully!");
   };
 
   // Pagination logic

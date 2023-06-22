@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { itemsdata } from "../../models/ItemsData";
+import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faBackward, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export const Sales = () => {
   const errorstyle = {
@@ -13,6 +17,19 @@ export const Sales = () => {
   const [newstock, setNewStock] = useState(false);
   const [SelectedItemName, setSelectedItemName] = useState("");
   const [formErrors, setFormErrors] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [items]);
 
   useEffect(() => {
     // Fetch items from the localStorage
@@ -52,6 +69,7 @@ export const Sales = () => {
     setNewStock(true);
     const nameToShow = items.find((item) => item.id === id);
     setSelectedItemName(nameToShow.name);
+    console.log("its name", SelectedItemName);
   };
 
   // Sell the items and update the available quantity
@@ -77,11 +95,17 @@ export const Sales = () => {
         if (newstock) {
           // Restocking: Add the quantity to the current stock
           selectedItem.NumberInStock += quantity;
+          toast.success("Item restocked successfully");
         } else {
           // Selling: Subtract the quantity from the current stock
-          selectedItem.NumberInStock -= quantity;
-          // Add the quantity to today's sale
-          selectedItem.todaySale += quantity;
+          if (selectedItem.NumberInStock >= quantity) {
+            selectedItem.NumberInStock -= quantity;
+            // Add the quantity to today's sale
+            selectedItem.todaySale += quantity;
+            toast.success("Item sold successfully");
+          } else {
+            toast.error("Not enough stock to sell");
+          }
         }
 
         // Set the updated item to the state
@@ -104,7 +128,7 @@ export const Sales = () => {
   };
 
   // Filter items based on the search term
-  const filteredItems = items.filter((item) =>
+  const filteredItems = currentItems.filter((item) =>
     item.name.toLowerCase().includes(searchbyName.toLowerCase())
   );
 
@@ -112,13 +136,31 @@ export const Sales = () => {
     <div>
       <div>
         <h1>Sales</h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <input
+            type="text"
+            placeholder="Search by product name"
+            value={searchbyName}
+            onChange={handleSearch}
+            style={{
+              width: "300px",
+              height: "50px",
+              borderRadius: "10px",
+              border: "1px solid #ccc",
+              padding: "5px",
+              marginBottom: "10px",
+              marginTop: "10px",
+            }}
+          />
+          <FontAwesomeIcon icon={faSearch} className="mediaicon" size="2x" />
+        </div>
 
-        <input
-          type="text"
-          placeholder="Search by product name"
-          value={searchbyName}
-          onChange={handleSearch}
-        />
         {filteredItems.length > 0 ? (
           <table>
             <thead>
@@ -171,6 +213,31 @@ export const Sales = () => {
           <p>No items found.</p>
         )}
 
+        {/* Pagination */}
+        <div
+          style={{
+            marginTop: "20px",
+            right: "0",
+            position: "absolute",
+            marginRight: "20px",
+          }}
+        >
+          {items.length > itemsPerPage && (
+            <ul style={{ display: "flex", listStyle: "none", padding: 0 }}>
+              {Array.from(
+                { length: Math.ceil(items.length / itemsPerPage) },
+                (_, index) => (
+                  <li key={index} style={{ margin: "8px" }}>
+                    <button onClick={() => paginate(index + 1)}>
+                      {index + 1}
+                    </button>
+                  </li>
+                )
+              )}
+            </ul>
+          )}
+        </div>
+
         {/* <!-- Modal --> */}
         <div
           class="modal fade"
@@ -216,6 +283,8 @@ export const Sales = () => {
                         name="quantity"
                         value={newQuantity}
                         onChange={handleInputChange}
+                        //only postive numbers
+                        min="0"
                       />
                       <div>
                         {formErrors.quantity && (
@@ -227,7 +296,7 @@ export const Sales = () => {
                     </div>
                   </div>
                   <button type="submit" className="btn btn-primary">
-                    {showInputs ? "Restock" : "Sell"}
+                    {newstock ? "Restock" : "Sell"}
                   </button>
                 </form>
               </div>

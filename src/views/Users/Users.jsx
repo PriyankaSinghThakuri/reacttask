@@ -3,7 +3,7 @@ import { userdata } from "../../models/UserData";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Users.css";
-
+import { toast } from "react-toastify";
 
 const User = () => {
   const errorstyle = {
@@ -92,12 +92,14 @@ const User = () => {
       setNewUser({ name: "", email: "", address: "", role: "" });
       setShowInputs(false);
       setFormErrors({});
+      toast.success("User added successfully");
     }
   };
 
   const editUser = (userId) => {
     const userToEdit = users.find((user) => user.id === userId);
     setEditingUserId(userId);
+
     setNewUser({
       name: userToEdit.username,
       email: userToEdit.email,
@@ -106,6 +108,7 @@ const User = () => {
     });
     setShowInputs(true);
     setFormErrors({});
+    toast.success("User edited successfully");
   };
 
   const updateUser = () => {
@@ -114,6 +117,7 @@ const User = () => {
         user.id === editingUserId ? { ...user, ...newUser } : user
       );
       setUsers(updatedUsers);
+      toast.success("User updated successfully");
       setNewUser({ name: "", email: "", address: "", role: "" });
       setEditingUserId(null);
       setShowInputs(false);
@@ -124,6 +128,7 @@ const User = () => {
   const deleteUser = (userId) => {
     const updatedUsers = users.filter((user) => user.id !== userId);
     setUsers(updatedUsers);
+    toast.success("User deleted successfully");
   };
 
   return (

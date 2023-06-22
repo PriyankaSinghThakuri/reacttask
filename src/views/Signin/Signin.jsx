@@ -8,6 +8,8 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { userdata } from "../../models/UserData";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -16,24 +18,14 @@ const Signin = () => {
   const [errors, setErrors] = useState("{username:'', password:''}");
   const formdata = { username, password };
 
-  // User Login info
-  // const database = [
-  //   {
-  //     username: "itsadmin",
-  //     password: "admin123",
-  //     role: "admin",
-  //   },
-  //   {
-  //     username: "itssupervisor",
-  //     password: "supervisor123",
-  //     role: "supervisor",
-  //   },
-  // ];
-
-  const handleSubmit = (event) => {
+  //submit the login form with validation
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
+    //validation
     let errorCount = 0;
+
+    //check if username and password is empty
     if (username === "") {
       errorCount++;
       setErrors((prevState) => {
@@ -44,6 +36,7 @@ const Signin = () => {
         return { ...prevState, username: "" };
       });
     }
+    //check if password is empty and length is less than 8
     if (password === "") {
       errorCount++;
       setErrors((prevState) => {
@@ -62,37 +55,37 @@ const Signin = () => {
         return { ...prevState, password: "" };
       });
     }
-    // if (errorCount === 0) {
-    //   console.log(formdata);
-    //   setUsername("");
-    //   setPassword("");
-    // }
-    // if (formdata === database) {
-    //   navigate("/dashboard");
-    //   alert("Successfully Logged In");
-    // } else {
-    //   alert("Failed to Login, Please try again");
-    //   navigate("/e-commerce-application");
-    // }
+
+    //if no error then login
     if (errorCount === 0) {
       const user = userdata.find(
         (user) => user.username === username && user.password === password
       );
       if (user) {
+        //set user details in local storage
         localStorage.setItem("role", user.role);
+        const role = localStorage.getItem("role");
+        // eslint-disable-next-line no-lone-blocks
+        // {
+        //   role === "salesperson"
+        //     ? navigate("/dashboard/sales")
+        //     : navigate("/dashboard");
+        // }
         navigate("/dashboard");
-        alert("Successfully Logged In");
+        toast.success("Successfully Logged In");
       } else {
-        alert("Failed to Login, Please try again");
-        navigate("/");
+        toast.error("Failed to Login, Please try again");
+        navigate("/signin");
       }
 
+      //clear the form
       setUsername("");
       setPassword("");
     }
   };
 
   return (
+    //login form
     <div
       style={{
         display: "flex",
@@ -125,6 +118,7 @@ const Signin = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
+              {/* //display error message */}
               {errors.username && (
                 <p style={{ textDecoration: "none", color: "red" }}>
                   {errors.username}

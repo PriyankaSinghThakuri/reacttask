@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { roledata } from "../../models/RolesData";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { toast } from "react-toastify";
 
 const Role = () => {
   const errorstyle = {
@@ -58,6 +59,7 @@ const Role = () => {
       setnewRole({ name: "" });
       setShowInputs(false);
       setFormErrors({});
+      toast.success("New Role added successfully!");
     }
   };
 
@@ -69,6 +71,7 @@ const Role = () => {
     });
     setShowInputs(true);
     setFormErrors({});
+    toast.success("Role updated successfully!");
   };
 
   const updateRole = () => {
@@ -81,12 +84,14 @@ const Role = () => {
       setEditingUserId(null);
       setShowInputs(false);
       setFormErrors({});
+      toast.success("Role updated successfully!");
     }
   };
 
   const deleteRole = (roleId) => {
     const updatedRoles = roles.filter((role) => role.id !== roleId);
     setRoles(updatedRoles);
+    toast.success("Role deleted successfully!");
   };
 
   return (
