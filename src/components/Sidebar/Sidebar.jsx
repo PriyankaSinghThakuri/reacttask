@@ -54,7 +54,6 @@ const Sidebar = () => {
                 </NavLink>
               </>
             }
-
             <NavLink to="/dashboard/users">
               <CDBSidebarMenuItem icon="user" id="menuitem">
                 Users
@@ -72,31 +71,12 @@ const Sidebar = () => {
               </CDBSidebarMenuItem>
             </NavLink>
             <NavLink onClick={handlelogout}>
-              <CDBSidebarMenuItem icon="chart-line" id="menuitem">
+              <CDBSidebarMenuItem icon="sign-out-alt" id="menuitem">
                 LogOut
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
-
-        <CDBSidebarFooter>
-          {/* <div className="sidebar-footer">
-            <CDBSidebarMenu>
-              <CDBSidebarContent>
-                <NavLink to="/">
-                  <CDBSidebarMenuItem icon="question" id="menuitem">
-                    Help
-                  </CDBSidebarMenuItem>
-                </NavLink>
-                <NavLink to="/">
-                  <CDBSidebarMenuItem icon="book" id="menuitem">
-                    Contact Us
-                  </CDBSidebarMenuItem>
-                </NavLink>
-              </CDBSidebarContent>
-            </CDBSidebarMenu>
-          </div> */}
-        </CDBSidebarFooter>
       </CDBSidebar>
     </div>
   );
