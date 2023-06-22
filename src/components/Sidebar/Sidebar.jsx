@@ -14,6 +14,11 @@ const Sidebar = () => {
   //get role from local storage
   const role = localStorage.getItem("role");
   console.log(role);
+
+  const handlelogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
   return (
     <div
       style={{
@@ -64,6 +69,11 @@ const Sidebar = () => {
             <NavLink to="/dashboard/sales">
               <CDBSidebarMenuItem icon="chart-line" id="menuitem">
                 Sales
+              </CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink onClick={handlelogout}>
+              <CDBSidebarMenuItem icon="chart-line" id="menuitem">
+                LogOut
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

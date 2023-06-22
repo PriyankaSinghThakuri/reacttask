@@ -24,7 +24,7 @@ function NavBar() {
     <div className="nav">
       {/* navbar starts */}
       <nav className="navbar fixed-bottom navbar-expand-lg navbar-dark ">
-        <NavLink className="navbar-brand" to="/">
+        <NavLink className="navbar-brand" to="#">
           GadgetByte
         </NavLink>
         <div className="container-fluid">
